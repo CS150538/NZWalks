@@ -23,11 +23,17 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      # - name: Build with dotnet
+      #   run: dotnet build --configuration Release
+
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build NZWalks.API/NZWalks.API.csproj -c Release
+
+      # - name: dotnet publish
+      #   run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish NZWalks.API/NZWalks.API.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -62,4 +68,5 @@ jobs:
           app-name: 'app-nzwalks-eastus-dev-001'
           slot-name: 'Production'
           package: .
+
           
